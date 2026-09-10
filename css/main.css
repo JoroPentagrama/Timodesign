@@ -1,4 +1,6 @@
-
+/* =========================================
+   RESET
+========================================= */
 
 * {
     margin: 0;
@@ -13,14 +15,8 @@ html {
 body {
     background: #080b0d;
     color: #eeeeee;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
     line-height: 1.5;
-
     overflow-x: hidden;
 }
 
@@ -42,7 +38,6 @@ img {
     max-width: 100%;
 }
 
-
 /* =========================================
    VARIABLES
 ========================================= */
@@ -51,30 +46,21 @@ img {
     --background: #080b0d;
     --dark: #0c1115;
     --light-dark: #10161a;
-
     --white: #eeeeee;
     --gray: #9aa2a7;
     --dark-gray: #687177;
-
     --border: rgba(255, 255, 255, 0.10);
-
-    --container: 1180px;
+    --container: 1120px;
 }
-
 
 /* =========================================
    CONTAINER
 ========================================= */
 
 .container {
-    width: min(
-        calc(100% - 60px),
-        var(--container)
-    );
-
-    margin: 0 auto;
+    width: min(calc(100% - 60px), var(--container));
+    margin-inline: auto;
 }
-
 
 /* =========================================
    HEADER
@@ -82,196 +68,123 @@ img {
 
 .header {
     position: fixed;
-
-    top: 0;
-
+    inset-block-start: 0;
+    inset-inline: 0;
     width: 100%;
     height: 82px;
-
     z-index: 1000;
-
     border-bottom: 1px solid transparent;
-
-    transition: 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .header.scrolled {
     background: rgba(8, 11, 13, 0.95);
-
     backdrop-filter: blur(14px);
-
     border-color: var(--border);
 }
 
-
-/* =========================================
-   HEADER INNER
-
-   GRID:
-
-   NAV       LOGO       BUTTON
-
-   Логото винаги е в истинския
-   център на header-а.
-========================================= */
-
 .header-inner {
+    position: relative;
+    width: 100%;
     height: 100%;
-
     display: grid;
-
-    grid-template-columns:
-        1fr
-        auto
-        1fr;
-
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
 }
 
-
-/* =========================================
-   LOGO
-========================================= */
-
 .logo {
-    grid-column: 2;
-
-    grid-row: 1;
-
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
     width: 48px;
     height: 48px;
-
     display: block;
-
+    transform: translate(-50%, -50%);
     overflow: hidden;
-
-    justify-self: center;
+    z-index: 5;
 }
 
 .logo img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
 }
 
-
-/* =========================================
-   DESKTOP NAVIGATION
-========================================= */
-
 .desktop-nav {
     grid-column: 1;
-
-    grid-row: 1;
-
     display: flex;
-
+    align-items: center;
     gap: 34px;
-
     justify-self: start;
+    min-width: 0;
 }
 
 .desktop-nav a {
     position: relative;
-
+    display: inline-block;
     color: #a6adb1;
-
     font-size: 13px;
-
-    transition: 0.25s ease;
+    white-space: nowrap;
+    transition: color 0.25s ease;
 }
 
 .desktop-nav a:hover {
-    color: white;
+    color: #ffffff;
 }
 
 .desktop-nav a::after {
     content: "";
-
     position: absolute;
-
-    bottom: -7px;
-
+    inset-block-end: -7px;
+    inset-inline-start: 0;
     width: 0;
     height: 1px;
-
-    background: white;
-
-    transition: 0.25s ease;
+    background: #ffffff;
+    transition: width 0.25s ease;
 }
 
 .desktop-nav a:hover::after {
     width: 100%;
 }
 
-
-/* =========================================
-   HEADER BUTTON
-========================================= */
-
 .header-button {
     grid-column: 3;
-
-    grid-row: 1;
-
     justify-self: end;
-
     padding: 11px 18px;
-
     border: 1px solid var(--border);
-
     font-size: 12px;
-
-    transition: 0.25s ease;
+    white-space: nowrap;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .header-button:hover {
-    background: white;
-
+    background: #ffffff;
     color: #080b0d;
+    border-color: #ffffff;
 }
-
-
-/* =========================================
-   MOBILE MENU BUTTON
-========================================= */
 
 .menu-button {
     display: none;
-
     width: 44px;
     height: 44px;
-
+    padding: 0;
     background: transparent;
-
     border: 0;
-
     cursor: pointer;
 }
 
 .menu-button span {
     display: block;
-
     width: 25px;
     height: 2px;
-
     margin: 5px auto;
-
-    background: white;
-
-    transition: 0.25s ease;
+    background: #ffffff;
+    transition: transform 0.25s ease, opacity 0.25s ease;
 }
-
-
-/* =========================================
-   MOBILE NAVIGATION
-========================================= */
 
 .mobile-nav {
     display: none;
 }
-
 
 /* =========================================
    HERO
@@ -279,116 +192,80 @@ img {
 
 .hero {
     position: relative;
-
     min-height: 100vh;
-
     display: flex;
-
     align-items: center;
-
     padding-top: 82px;
-
     overflow: hidden;
+    isolation: isolate;
 }
 
 .hero-background {
     position: absolute;
-
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
     width: 650px;
     height: 650px;
-
-    top: 50%;
-
-    transform: translateY(-50%);
-
+    transform: translate(-50%, -50%);
     border-radius: 50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(105, 125, 135, 0.10),
-            transparent 68%
-        );
-
+    background: radial-gradient(circle, rgba(105, 125, 135, 0.10), transparent 68%);
     pointer-events: none;
+    z-index: -1;
 }
 
 .hero-line {
     position: absolute;
-
-    top: 0;
-    bottom: 0;
-
+    inset-block: 0;
+    inset-inline-start: 50%;
     width: 1px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            transparent,
-            rgba(255, 255, 255, 0.08),
-            transparent
-        );
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.08), transparent);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .hero-grid {
+    position: relative;
+    width: 100%;
     display: grid;
-
-    grid-template-columns:
-        1.1fr
-        0.9fr;
-
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
     align-items: center;
-
     gap: 70px;
 }
 
 .hero-text {
+    position: relative;
+    z-index: 2;
     max-width: 680px;
+    min-width: 0;
 }
 
 .eyebrow {
     margin-bottom: 25px;
-
     color: #7e888e;
-
     font-size: 10px;
-
     letter-spacing: 5px;
 }
 
 .hero h1 {
-    font-size:
-        clamp(
-            50px,
-            6vw,
-            82px
-        );
-
+    font-size: clamp(50px, 6vw, 82px);
     font-weight: 400;
-
     line-height: 1.02;
-
     letter-spacing: -3px;
 }
 
 .hero h1 span {
     display: block;
-
     color: #7f8990;
 }
 
 .hero-description {
     max-width: 570px;
-
     margin-top: 30px;
-
     color: #91999e;
-
     font-size: 16px;
-
     line-height: 1.8;
 }
-
 
 /* =========================================
    HERO BUTTONS
@@ -396,30 +273,23 @@ img {
 
 .hero-buttons {
     display: flex;
-
+    align-items: center;
     gap: 12px;
-
     margin-top: 38px;
 }
 
 .button {
     min-height: 48px;
-
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     padding: 0 22px;
-
     font-size: 13px;
-
-    transition: 0.25s ease;
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 
 .button-primary {
     background: var(--white);
-
     color: #080b0d;
 }
 
@@ -429,88 +299,58 @@ img {
 
 .button-secondary {
     border: 1px solid var(--border);
-
     color: #d2d6d8;
 }
 
 .button-secondary:hover {
-    border-color:
-        rgba(255, 255, 255, 0.35);
-
+    border-color: rgba(255, 255, 255, 0.35);
     transform: translateY(-3px);
 }
 
-
-/* =========================================
-   HERO IMAGE
-========================================= */
-
 .hero-image {
     position: relative;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
 }
 
 .hero-image img {
-    width: min(
-        100%,
-        430px
-    );
-
-    height: auto;
-
     position: relative;
-
     z-index: 2;
-
-    box-shadow:
-        0 30px 60px
-        rgba(0, 0, 0, 0.45);
+    width: min(100%, 430px);
+    height: auto;
+    margin-inline: auto;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
 }
 
 .hero-image-border {
     position: absolute;
-
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
     width: 350px;
     height: 350px;
-
-    border: 1px solid
-        rgba(255, 255, 255, 0.045);
-
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255, 255, 255, 0.045);
     border-radius: 50%;
+    pointer-events: none;
 }
-
-
-/* =========================================
-   HERO BOTTOM
-========================================= */
 
 .hero-bottom {
     position: absolute;
-
-    bottom: 25px;
-
+    inset-block-end: 25px;
+    inset-inline: 0;
     width: 100%;
-
-    padding: 0 40px;
-
+    padding-inline: 40px;
     display: flex;
-
+    align-items: center;
     justify-content: space-between;
-
     color: #4f585d;
-
     font-size: 9px;
-
     letter-spacing: 3px;
+    pointer-events: none;
 }
-
 
 /* =========================================
    SECTIONS
@@ -522,49 +362,25 @@ img {
 
 .section-label {
     display: block;
-
     margin-bottom: 24px;
-
     color: #707a80;
-
     font-size: 10px;
-
     letter-spacing: 3px;
 }
 
-
-/* =========================================
-   SECTION HEADING
-========================================= */
-
 .section-heading {
     display: grid;
-
-    grid-template-columns:
-        1fr
-        0.7fr;
-
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
     align-items: end;
-
     gap: 60px;
-
     margin-bottom: 65px;
 }
 
 .section-heading h2 {
     max-width: 650px;
-
-    font-size:
-        clamp(
-            40px,
-            5vw,
-            62px
-        );
-
+    font-size: clamp(40px, 5vw, 62px);
     font-weight: 400;
-
     line-height: 1.05;
-
     letter-spacing: -2px;
 }
 
@@ -574,117 +390,80 @@ img {
 
 .section-heading > p {
     max-width: 470px;
-
     color: #858e93;
-
     font-size: 15px;
-
     line-height: 1.8;
 }
-
 
 /* =========================================
    SERVICES
 ========================================= */
 
 .services-list {
-    border-top:
-        1px solid
-        var(--border);
+    border-top: 1px solid var(--border);
 }
 
 .service {
     width: 100%;
-
     display: grid;
-
-    grid-template-columns:
-        80px
-        1fr
-        60px;
-
+    grid-template-columns: 80px minmax(0, 1fr) 60px;
     align-items: center;
-
     gap: 30px;
-
     min-height: 180px;
-
     padding: 30px 0;
-
     color: inherit;
-
     text-align: left;
-
     background: transparent;
-
     border: 0;
-
-    border-bottom:
-        1px solid
-        var(--border);
-
+    border-bottom: 1px solid var(--border);
     cursor: pointer;
-
-    transition: 0.3s ease;
+    transition: background 0.3s ease, padding 0.3s ease;
 }
 
 .service:hover {
-    padding-left: 14px;
-
-    padding-right: 14px;
-
-    background:
-        rgba(255, 255, 255, 0.018);
+    padding-inline: 14px;
+    background: rgba(255, 255, 255, 0.018);
 }
 
 .service-number {
     color: #596267;
-
     font-size: 12px;
+}
+
+.service-main {
+    min-width: 0;
 }
 
 .service-main h3 {
     font-size: 25px;
-
     font-weight: 400;
 }
 
 .service-main p {
     max-width: 650px;
-
     margin-top: 9px;
-
     color: #7f888d;
-
     font-size: 14px;
-
     line-height: 1.7;
 }
 
 .service-arrow {
     color: #70797e;
-
     font-size: 25px;
-
     text-align: right;
-
-    transition: 0.25s ease;
+    transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .service:hover .service-arrow {
-    color: white;
-
+    color: #ffffff;
     transform: translateX(5px);
 }
 
 .service-hint {
     margin-top: 18px;
-
     color: #535c61;
-
     font-size: 11px;
 }
-
 
 /* =========================================
    ABOUT
@@ -696,112 +475,83 @@ img {
 
 .about-grid {
     display: grid;
-
-    grid-template-columns:
-        0.9fr
-        1.1fr;
-
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     align-items: center;
-
     gap: 100px;
+}
+
+.about-image {
+    min-width: 0;
 }
 
 .about-image-frame {
     position: relative;
-
     padding: 25px;
-
-    border:
-        1px solid
-        var(--border);
+    border: 1px solid var(--border);
 }
 
 .about-image-frame::before {
     content: "";
-
     position: absolute;
-
-    width: 100%;
-    height: 100%;
-
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.05);
-
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    pointer-events: none;
     z-index: 0;
 }
 
 .about-image-frame img {
     position: relative;
-
     z-index: 1;
-
     width: 100%;
 }
 
+.about-text {
+    min-width: 0;
+}
+
 .about-text h2 {
-    font-size:
-        clamp(
-            40px,
-            5vw,
-            62px
-        );
-
+    font-size: clamp(40px, 5vw, 62px);
     font-weight: 400;
-
     line-height: 1.05;
-
     letter-spacing: -2px;
 }
 
 .about-text h2 span {
     display: block;
-
     color: #7e898f;
 }
 
 .about-description {
     max-width: 620px;
-
     margin-top: 30px;
-
     color: #899297;
-
     font-size: 15px;
-
     line-height: 1.8;
 }
 
 .advantages {
     display: grid;
-
-    grid-template-columns:
-        1fr
-        1fr;
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px 30px;
-
     margin-top: 38px;
 }
 
 .advantage {
     display: flex;
-
     align-items: flex-start;
-
     gap: 12px;
+    min-width: 0;
 }
 
 .advantage span {
+    flex-shrink: 0;
     color: #d8dcde;
 }
 
 .advantage p {
     color: #949da1;
-
     font-size: 13px;
 }
-
 
 /* =========================================
    GALLERY
@@ -809,25 +559,16 @@ img {
 
 .gallery {
     display: grid;
-
-    grid-template-columns:
-        1.3fr
-        1fr;
-
-    grid-template-rows:
-        310px
-        310px;
-
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    grid-template-rows: 310px 310px;
     gap: 15px;
 }
 
 .gallery-item {
     position: relative;
-
     overflow: hidden;
-
+    min-width: 0;
     background: #11161a;
-
     cursor: pointer;
 }
 
@@ -838,13 +579,8 @@ img {
 .gallery-item img {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
-    transition:
-        transform
-        0.6s
-        ease;
+    transition: transform 0.6s ease;
 }
 
 .gallery-item:hover img {
@@ -853,50 +589,32 @@ img {
 
 .gallery-overlay {
     position: absolute;
-
-    bottom: 0;
-
+    inset-block-end: 0;
+    inset-inline: 0;
     width: 100%;
-
     padding: 30px;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(0, 0, 0, 0.9)
-        );
-
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
     opacity: 0;
-
-    transform:
-        translateY(15px);
-
-    transition: 0.35s ease;
+    transform: translateY(15px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .gallery-item:hover .gallery-overlay {
     opacity: 1;
-
-    transform:
-        translateY(0);
+    transform: translateY(0);
 }
 
 .gallery-overlay span {
     color: #a2aaae;
-
     font-size: 9px;
-
     letter-spacing: 3px;
 }
 
 .gallery-overlay h3 {
     margin-top: 7px;
-
     font-size: 20px;
-
     font-weight: 400;
 }
-
 
 /* =========================================
    STATEMENT
@@ -904,30 +622,15 @@ img {
 
 .statement {
     padding: 120px 0;
-
-    border-top:
-        1px solid
-        var(--border);
-
-    border-bottom:
-        1px solid
-        var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 .statement h2 {
     max-width: 900px;
-
-    font-size:
-        clamp(
-            42px,
-            6vw,
-            76px
-        );
-
+    font-size: clamp(42px, 6vw, 76px);
     font-weight: 400;
-
     line-height: 1;
-
     letter-spacing: -3px;
 }
 
@@ -937,14 +640,10 @@ img {
 
 .statement p {
     max-width: 620px;
-
     margin-top: 30px;
-
     color: #818b90;
-
     line-height: 1.8;
 }
-
 
 /* =========================================
    CONTACT
@@ -952,22 +651,13 @@ img {
 
 .contact-heading {
     max-width: 850px;
-
     margin-bottom: 60px;
 }
 
 .contact-heading h2 {
-    font-size:
-        clamp(
-            40px,
-            5vw,
-            65px
-        );
-
+    font-size: clamp(40px, 5vw, 65px);
     font-weight: 400;
-
     line-height: 1.05;
-
     letter-spacing: -2px;
 }
 
@@ -977,149 +667,111 @@ img {
 
 .contact-heading p {
     max-width: 600px;
-
     margin-top: 25px;
-
     color: #899297;
-
     line-height: 1.8;
 }
 
-
-/* =========================================
-   CONTACT LIST
-========================================= */
-
 .contact-list {
-    border-top:
-        1px solid
-        var(--border);
+    border-top: 1px solid var(--border);
 }
 
 .contact-item {
     min-height: 155px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
+    gap: 30px;
     padding: 25px 5px;
-
-    border-bottom:
-        1px solid
-        var(--border);
-
-    transition: 0.3s ease;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s ease, padding 0.3s ease;
 }
 
 .contact-item:hover {
-    padding-left: 15px;
+    padding-inline: 15px;
+    background: rgba(255, 255, 255, 0.018);
+}
 
-    padding-right: 15px;
-
-    background:
-        rgba(255, 255, 255, 0.018);
+.contact-item > div {
+    min-width: 0;
 }
 
 .contact-item span {
     display: block;
-
     margin-bottom: 15px;
-
     color: #626c71;
-
     font-size: 9px;
-
     letter-spacing: 3px;
 }
 
 .contact-item strong {
     color: #dfe2e3;
-
     font-size: 18px;
-
     font-weight: 400;
-
     word-break: break-word;
 }
 
 .contact-item b {
+    flex-shrink: 0;
     color: #717b80;
-
     font-size: 25px;
-
     font-weight: 400;
-
-    transition: 0.25s ease;
+    transition: color 0.25s ease, transform 0.25s ease;
 }
 
 .contact-item:hover b {
-    color: white;
-
-    transform:
-        translateX(5px);
+    color: #ffffff;
+    transform: translateX(5px);
 }
-
 
 /* =========================================
    FOOTER
 ========================================= */
 
 .footer {
-    border-top:
-        1px solid
-        var(--border);
+    border-top: 1px solid var(--border);
 }
 
 .footer-inner {
     min-height: 100px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-inner > a {
+    flex-shrink: 0;
 }
 
 .footer-inner img {
     width: 42px;
     height: 42px;
-
     object-fit: cover;
 }
 
 .footer-inner p {
     color: #555e63;
-
     font-size: 11px;
+    text-align: center;
 }
 
 .back-top {
     width: 40px;
     height: 40px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
-    border:
-        1px solid
-        var(--border);
-
+    flex-shrink: 0;
+    border: 1px solid var(--border);
     color: #858e93;
-
-    transition: 0.25s ease;
+    transition: background 0.25s ease, color 0.25s ease;
 }
 
 .back-top:hover {
-    background: white;
-
+    background: #ffffff;
     color: #080b0d;
 }
-
 
 /* =========================================
    SCROLL REVEAL
@@ -1127,22 +779,14 @@ img {
 
 .reveal {
     opacity: 0;
-
-    transform:
-        translateY(25px);
-
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
+    transform: translate3d(0, 25px, 0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .reveal.visible {
     opacity: 1;
-
-    transform:
-        translateY(0);
+    transform: translate3d(0, 0, 0);
 }
-
 
 /* =========================================
    SERVICE MODAL
@@ -1150,133 +794,83 @@ img {
 
 .service-modal {
     position: fixed;
-
     inset: 0;
-
     z-index: 3000;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     padding: 25px;
-
-    background:
-        rgba(0, 0, 0, 0.82);
-
+    background: rgba(0, 0, 0, 0.82);
     backdrop-filter: blur(8px);
-
     opacity: 0;
-
     visibility: hidden;
-
-    transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .service-modal.active {
     opacity: 1;
-
     visibility: visible;
 }
 
 .modal-box {
     position: relative;
-
-    width: min(
-        100%,
-        680px
-    );
-
+    width: min(100%, 680px);
     max-height: 90vh;
-
     overflow-y: auto;
-
     padding: 55px;
-
     background: #0d1216;
-
-    border:
-        1px solid
-        var(--border);
-
-    transform:
-        translateY(25px)
-        scale(0.98);
-
-    transition:
-        transform 0.3s ease;
+    border: 1px solid var(--border);
+    transform: translate3d(0, 25px, 0) scale(0.98);
+    transition: transform 0.3s ease;
 }
 
 .service-modal.active .modal-box {
-    transform:
-        translateY(0)
-        scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
 }
 
 .modal-close {
     position: absolute;
-
-    top: 20px;
-
+    inset-block-start: 20px;
+    inset-inline-end: 20px;
     width: 40px;
     height: 40px;
-
-    border:
-        1px solid
-        var(--border);
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid var(--border);
     background: transparent;
-
     color: #dce0e2;
-
     font-size: 25px;
-
+    line-height: 1;
     cursor: pointer;
-
-    transition: 0.25s ease;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .modal-close:hover {
-    background: white;
-
+    background: #ffffff;
     color: #080b0d;
+    border-color: #ffffff;
 }
 
 .modal-number {
     display: block;
-
     margin-bottom: 20px;
-
     color: #657076;
-
     font-size: 11px;
-
     letter-spacing: 3px;
 }
 
 .modal-box h2 {
-    font-size:
-        clamp(
-            32px,
-            5vw,
-            48px
-        );
-
+    font-size: clamp(32px, 5vw, 48px);
     font-weight: 400;
-
     line-height: 1.1;
 }
 
 .modal-content {
     margin-top: 30px;
-
     color: #929ba0;
-
     font-size: 15px;
-
     line-height: 1.85;
 }
 
@@ -1286,7 +880,6 @@ img {
 
 .modal-content ul {
     padding-left: 20px;
-
     margin-top: 10px;
 }
 
@@ -1296,35 +889,25 @@ img {
 
 .modal-button {
     display: inline-flex;
-
     align-items: center;
-
+    justify-content: center;
     gap: 18px;
-
     min-height: 48px;
-
     margin-top: 15px;
-
     padding: 0 22px;
-
-    background: white;
-
+    background: #ffffff;
     color: #080b0d;
-
     font-size: 13px;
-
-    transition: 0.25s ease;
+    transition: transform 0.25s ease;
 }
 
 .modal-button:hover {
-    transform:
-        translateY(-3px);
+    transform: translateY(-3px);
 }
 
 .modal-button span {
     font-size: 18px;
 }
-
 
 /* =========================================
    TABLET
@@ -1333,14 +916,8 @@ img {
 @media (max-width: 900px) {
 
     .container {
-        width:
-            calc(100% - 40px);
+        width: calc(100% - 40px);
     }
-
-
-    /* =====================================
-       HEADER
-    ====================================== */
 
     .desktop-nav,
     .header-button {
@@ -1348,86 +925,47 @@ img {
     }
 
     .header-inner {
-        grid-template-columns:
-            1fr
-            auto
-            1fr;
+        grid-template-columns: 1fr auto 1fr;
     }
 
     .logo {
-        grid-column: 2;
-        grid-row: 1;
-
-        justify-self: center;
+        width: 48px;
+        height: 48px;
     }
 
     .menu-button {
         display: block;
-
         grid-column: 3;
-        grid-row: 1;
-
         justify-self: end;
     }
 
-
-    /* =====================================
-       MOBILE NAVIGATION
-    ====================================== */
-
     .mobile-nav {
         position: fixed;
-
-        top: 82px;
-
+        inset-block-start: 82px;
+        inset-inline: 0;
         width: 100%;
-
         z-index: 999;
-
         display: flex;
-
         flex-direction: column;
-
         padding: 15px 25px;
-
-        background:
-            rgba(8, 11, 13, 0.98);
-
-        border-bottom:
-            1px solid
-            var(--border);
-
-        transform:
-            translateY(-130%);
-
-        transition: 0.35s ease;
+        background: rgba(8, 11, 13, 0.98);
+        border-bottom: 1px solid var(--border);
+        transform: translate3d(0, -130%, 0);
+        transition: transform 0.35s ease;
     }
 
     .mobile-nav.active {
-        transform:
-            translateY(0);
+        transform: translate3d(0, 0, 0);
     }
 
     .mobile-nav a {
         min-height: 52px;
-
         display: flex;
-
         align-items: center;
-
-        border-bottom:
-            1px solid
-            rgba(255, 255, 255, 0.06);
-
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         color: #c1c6c9;
-
         font-size: 14px;
     }
-
-
-    /* =====================================
-       HERO
-    ====================================== */
 
     .hero {
         min-height: 850px;
@@ -1435,51 +973,44 @@ img {
 
     .hero-grid {
         grid-template-columns: 1fr;
-
         gap: 50px;
     }
 
+    .hero-text {
+        width: 100%;
+        max-width: none;
+    }
+
     .hero-image {
-        position: absolute;
-
-        bottom: 70px;
-
-        width: min(
-            420px,
-            80vw
-        );
-
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         opacity: 0.13;
-
         pointer-events: none;
     }
 
     .hero-image img {
-        width: 100%;
+        width: min(420px, 80vw);
+        margin-inline: auto;
     }
 
     .hero-line {
         opacity: 0.7;
     }
 
-
-    /* =====================================
-       OTHER SECTIONS
-    ====================================== */
-
     .section-heading {
         grid-template-columns: 1fr;
-
         gap: 25px;
     }
 
     .about-grid {
         grid-template-columns: 1fr;
-
         gap: 60px;
     }
 
     .about-image {
+        width: 100%;
         max-width: 500px;
     }
 
@@ -1488,7 +1019,6 @@ img {
     }
 }
 
-
 /* =========================================
    MOBILE
 ========================================= */
@@ -1496,14 +1026,8 @@ img {
 @media (max-width: 600px) {
 
     .container {
-        width:
-            calc(100% - 30px);
+        width: calc(100% - 40px);
     }
-
-
-    /* =====================================
-       HEADER
-    ====================================== */
 
     .header {
         height: 72px;
@@ -1517,121 +1041,90 @@ img {
     .menu-button {
         width: 44px;
         height: 44px;
+        grid-column: 3;
+        justify-self: end;
     }
 
     .mobile-nav {
-        top: 72px;
+        inset-block-start: 72px;
     }
 
-
-    /* =====================================
-       HERO
-    ====================================== */
-
     .hero {
-        min-height:
-            calc(100svh - 72px);
-
+        min-height: calc(100svh - 72px);
         padding-top: 100px;
-
-        padding-bottom: 100px;
-
+        padding-bottom: 60px;
         align-items: flex-start;
     }
 
     .hero-grid {
         display: flex;
-
         flex-direction: column;
-
         align-items: center;
+        gap: 0;
     }
 
     .hero-text {
         position: relative;
-
         z-index: 2;
-
         width: 100%;
+        max-width: none;
     }
 
     .eyebrow {
         margin-bottom: 20px;
-
         font-size: 9px;
-
         letter-spacing: 4px;
     }
 
     .hero h1 {
-        font-size: 48px;
-
-        letter-spacing: -2.5px;
-
-        line-height: 1.02;
+        font-size: 44px;
+        letter-spacing: -2px;
+        line-height: 1.05;
     }
 
     .hero-description {
-        margin-top: 25px;
-
+        margin-top: 22px;
         font-size: 15px;
-
         line-height: 1.75;
     }
 
-
-    /* =====================================
-       BUTTONS
-    ====================================== */
+    /* ===== BUTTONS: centered, capped width, not touching edges ===== */
 
     .hero-buttons {
+        width: 100%;
+        max-width: 320px;
         flex-direction: column;
-
+        align-items: center;
         gap: 10px;
-
-        margin-top: 30px;
+        margin: 28px auto 0;
     }
 
     .button {
         width: 100%;
-
         min-height: 52px;
     }
 
-
-    /* =====================================
-       HERO LOGO
-
-       Центрирано чрез flex/grid логика,
-       без ръчно местене.
-    ====================================== */
-
     .hero-image {
-        position: absolute;
-
-        bottom: 35px;
-
-        width: 280px;
-
+        position: relative;
+        width: 240px;
+        margin: 30px auto 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         opacity: 0.10;
-
         pointer-events: none;
-
-        align-self: center;
     }
 
     .hero-image img {
         width: 100%;
         height: auto;
-
-        box-shadow:
-            0 25px 50px
-            rgba(0, 0, 0, 0.45);
+        margin-inline: auto;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
     }
 
     .hero-image-border {
-        width: 250px;
-        height: 250px;
+        width: 220px;
+        height: 220px;
     }
 
     .hero-line {
@@ -1642,48 +1135,33 @@ img {
         display: none;
     }
 
-
-    /* =====================================
-       SECTION HEADINGS
-    ====================================== */
+    .section {
+        padding: 80px 0;
+    }
 
     .section-heading {
-        margin-bottom: 45px;
+        margin-bottom: 40px;
     }
 
     .section-heading h2 {
-        font-size: 42px;
-
-        letter-spacing: -2px;
+        font-size: 38px;
+        letter-spacing: -1.5px;
     }
 
     .section-heading > p {
         font-size: 14px;
-
-        line-height: 1.75;
+        line-height: 1.7;
     }
 
-
-    /* =====================================
-       SERVICES
-    ====================================== */
-
     .service {
-        grid-template-columns:
-            35px
-            1fr
-            25px;
-
+        grid-template-columns: 30px minmax(0, 1fr) 22px;
         gap: 10px;
-
-        min-height: 165px;
-
-        padding: 25px 0;
+        min-height: 150px;
+        padding: 22px 0;
     }
 
     .service:hover {
-        padding-left: 0;
-        padding-right: 0;
+        padding-inline: 0;
     }
 
     .service-number {
@@ -1691,76 +1169,55 @@ img {
     }
 
     .service-main h3 {
-        font-size: 20px;
+        font-size: 19px;
     }
 
     .service-main p {
         margin-top: 8px;
-
         font-size: 13px;
-
         line-height: 1.6;
     }
 
     .service-arrow {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .service-hint {
         font-size: 10px;
     }
 
-
-    /* =====================================
-       ABOUT
-    ====================================== */
-
     .about-grid {
-        gap: 50px;
+        gap: 45px;
     }
 
     .about-image-frame {
-        padding: 15px;
+        padding: 12px;
     }
 
     .about-text h2 {
-        font-size: 42px;
+        font-size: 38px;
     }
 
     .about-description {
         font-size: 14px;
-
-        line-height: 1.75;
+        line-height: 1.7;
     }
 
     .advantages {
         grid-template-columns: 1fr;
-
-        gap: 16px;
-
-        margin-top: 30px;
+        gap: 14px;
+        margin-top: 26px;
     }
 
     .advantage p {
         font-size: 13px;
     }
 
-
-    /* =====================================
-       GALLERY
-    ====================================== */
-
     .gallery {
         display: grid;
-
         grid-template-columns: 1fr;
-
-        grid-template-rows:
-            300px
-            250px
-            250px;
-
-        gap: 12px;
+        grid-template-rows: 260px 220px 220px;
+        gap: 10px;
     }
 
     .gallery-main {
@@ -1768,162 +1225,115 @@ img {
     }
 
     .gallery-overlay {
-        padding: 20px;
-
+        padding: 18px;
         opacity: 1;
-
         transform: none;
-
-        background:
-            linear-gradient(
-                transparent,
-                rgba(0, 0, 0, 0.8)
-            );
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
     }
 
     .gallery-overlay h3 {
-        font-size: 18px;
+        font-size: 17px;
     }
 
-
-    /* =====================================
-       STATEMENT
-    ====================================== */
-
     .statement {
-        padding: 85px 0;
+        padding: 70px 0;
     }
 
     .statement h2 {
-        font-size: 44px;
-
-        letter-spacing: -2px;
+        font-size: 38px;
+        letter-spacing: -1.5px;
     }
 
     .statement p {
         font-size: 14px;
-
-        line-height: 1.75;
+        line-height: 1.7;
     }
 
-
-    /* =====================================
-       CONTACT
-    ====================================== */
-
     .contact-heading {
-        margin-bottom: 45px;
+        margin-bottom: 40px;
     }
 
     .contact-heading h2 {
-        font-size: 42px;
-
-        letter-spacing: -2px;
+        font-size: 38px;
+        letter-spacing: -1.5px;
     }
 
     .contact-heading p {
         font-size: 14px;
-
-        line-height: 1.75;
+        line-height: 1.7;
     }
 
     .contact-item {
-        min-height: 115px;
-
-        padding: 22px 0;
+        min-height: 110px;
+        padding: 20px 0;
+        gap: 15px;
     }
 
     .contact-item:hover {
-        padding-left: 0;
-        padding-right: 0;
+        padding-inline: 0;
     }
 
     .contact-item span {
-        margin-bottom: 9px;
+        margin-bottom: 8px;
     }
 
     .contact-item strong {
-        max-width: 270px;
-
-        font-size: 15px;
+        max-width: 220px;
+        font-size: 14px;
     }
 
     .contact-item b {
-        font-size: 20px;
+        font-size: 18px;
     }
 
-
-    /* =====================================
-       FOOTER
-    ====================================== */
-
     .footer-inner {
-        min-height: 150px;
-
-        padding: 25px 0;
-
+        min-height: 130px;
+        padding: 20px 0;
         flex-direction: column;
-
-        gap: 20px;
-
+        gap: 16px;
         text-align: center;
     }
 
-
-    /* =====================================
-       MODAL
-    ====================================== */
-
     .service-modal {
-        padding: 15px;
-
+        padding: 12px;
         align-items: flex-end;
     }
 
     .modal-box {
         width: 100%;
-
         max-height: 88svh;
-
-        padding: 38px 22px 25px;
+        padding: 34px 20px 22px;
     }
 
     .modal-close {
-        top: 12px;
-
-        width: 38px;
-        height: 38px;
+        inset-block-start: 10px;
+        inset-inline-end: 10px;
+        width: 36px;
+        height: 36px;
     }
 
     .modal-number {
-        margin-bottom: 15px;
+        margin-bottom: 12px;
     }
 
     .modal-box h2 {
-        font-size: 34px;
-
-        padding-right: 35px;
+        font-size: 30px;
+        padding-right: 30px;
     }
 
     .modal-content {
-        margin-top: 22px;
-
+        margin-top: 18px;
         font-size: 14px;
-
-        line-height: 1.75;
+        line-height: 1.7;
     }
 
     .modal-button {
         width: 100%;
-
         justify-content: center;
-
-        min-height: 52px;
-
-        margin-top: 10px;
+        min-height: 50px;
+        margin-top: 8px;
     }
 }
-
 
 /* =========================================
    VERY SMALL PHONES
@@ -1931,34 +1341,36 @@ img {
 
 @media (max-width: 380px) {
 
+    .container {
+        width: calc(100% - 32px);
+    }
+
     .hero h1 {
-        font-size: 42px;
+        font-size: 38px;
     }
 
     .section-heading h2,
     .about-text h2,
     .contact-heading h2 {
-        font-size: 37px;
+        font-size: 32px;
     }
 
     .service {
-        min-height: 175px;
+        min-height: 160px;
     }
 
     .service-main h3 {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .hero-image {
-        width: 250px;
-
-        bottom: 30px;
-
+        width: 200px;
+        margin-top: 25px;
         opacity: 0.10;
     }
 
     .hero-image-border {
-        width: 220px;
-        height: 220px;
+        width: 190px;
+        height: 190px;
     }
 }
