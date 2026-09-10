@@ -117,7 +117,9 @@ img {
 }
 
 
-/* LOGO */
+/* =========================================
+   LOGO
+========================================= */
 
 .logo {
     width: 48px;
@@ -134,7 +136,9 @@ img {
 }
 
 
-/* DESKTOP NAV */
+/* =========================================
+   DESKTOP NAVIGATION
+========================================= */
 
 .desktop-nav {
     display: flex;
@@ -177,7 +181,9 @@ img {
 }
 
 
-/* HEADER BUTTON */
+/* =========================================
+   HEADER BUTTON
+========================================= */
 
 .header-button {
     padding: 11px 18px;
@@ -191,12 +197,13 @@ img {
 
 .header-button:hover {
     background: white;
+
     color: #080b0d;
 }
 
 
 /* =========================================
-   MOBILE BUTTON
+   MOBILE MENU BUTTON
 ========================================= */
 
 .menu-button {
@@ -227,7 +234,7 @@ img {
 
 
 /* =========================================
-   MOBILE NAV
+   MOBILE NAVIGATION
 ========================================= */
 
 .mobile-nav {
@@ -407,33 +414,23 @@ img {
 
 
 /* =========================================
-   HERO IMAGE
+   HERO LOGO / IMAGE
+
+   НЯМА FLOAT АНИМАЦИЯ.
+
+   Логото е статично.
 ========================================= */
 
-@media (max-width: 600px) {
+.hero-image {
+    position: relative;
 
-    .hero-image {
-        position: absolute;
+    display: flex;
 
-        left: 50%;
-        right: auto;
+    align-items: center;
 
-        bottom: 35px;
+    justify-content: center;
 
-        width: min(300px, 78vw);
-
-        transform: translateX(-50%);
-
-        opacity: 0.10;
-
-        pointer-events: none;
-    }
-
-    .hero-image img {
-        width: 100%;
-        height: auto;
-    }
-
+    width: 100%;
 }
 
 .hero-image img {
@@ -442,6 +439,8 @@ img {
         430px
     );
 
+    height: auto;
+
     position: relative;
 
     z-index: 2;
@@ -449,12 +448,6 @@ img {
     box-shadow:
         0 30px 60px
         rgba(0, 0, 0, 0.45);
-
-    animation:
-        floatingLogo
-        6s
-        ease-in-out
-        infinite;
 }
 
 .hero-image-border {
@@ -467,19 +460,6 @@ img {
         rgba(255, 255, 255, 0.045);
 
     border-radius: 50%;
-}
-
-
-@keyframes floatingLogo {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
 }
 
 
@@ -627,6 +607,7 @@ img {
 
 .service:hover {
     padding-left: 14px;
+
     padding-right: 14px;
 
     background:
@@ -985,7 +966,9 @@ img {
 }
 
 
-/* CONTACT LIST */
+/* =========================================
+   CONTACT LIST
+========================================= */
 
 .contact-list {
     border-top:
@@ -1013,6 +996,7 @@ img {
 
 .contact-item:hover {
     padding-left: 15px;
+
     padding-right: 15px;
 
     background:
@@ -1335,16 +1319,16 @@ img {
     }
 
 
+    /* NAVIGATION */
+
     .desktop-nav,
     .header-button {
         display: none;
     }
 
-
     .menu-button {
         display: block;
     }
-
 
     .mobile-nav {
         position: fixed;
@@ -1375,12 +1359,10 @@ img {
         transition: 0.35s ease;
     }
 
-
     .mobile-nav.active {
         transform:
             translateY(0);
     }
-
 
     .mobile-nav a {
         min-height: 52px;
@@ -1399,10 +1381,11 @@ img {
     }
 
 
+    /* HERO */
+
     .hero {
         min-height: 850px;
     }
-
 
     .hero-grid {
         grid-template-columns: 1fr;
@@ -1410,35 +1393,48 @@ img {
         gap: 50px;
     }
 
-
     /*
-        TABLET LOGO
+        ЛОГОТО Е СТАТИЧНО.
 
-        Вече не го изкарваме прекалено
-        извън екрана.
+        Няма right: -145px.
+        Няма float.
+        Няма translateY.
+
+        На таблет го поставяме
+        точно по средата.
     */
 
     .hero-image {
         position: absolute;
 
-        right: 50%;
+        left: 50%;
+        right: auto;
+
         bottom: 70px;
 
-        width: 420px;
+        width: min(
+            420px,
+            80vw
+        );
 
         transform:
-            translateX(50%);
+            translateX(-50%);
 
         opacity: 0.13;
 
         pointer-events: none;
     }
 
+    .hero-image img {
+        width: 100%;
+    }
 
     .hero-line {
         left: 75%;
     }
 
+
+    /* OTHER SECTIONS */
 
     .section-heading {
         grid-template-columns: 1fr;
@@ -1446,23 +1442,19 @@ img {
         gap: 25px;
     }
 
-
     .about-grid {
         grid-template-columns: 1fr;
 
         gap: 60px;
     }
 
-
     .about-image {
         max-width: 500px;
     }
 
-
     .contact-item {
         min-height: 130px;
     }
-
 }
 
 
@@ -1478,11 +1470,6 @@ img {
     }
 
 
-    .section {
-        padding: 85px 0;
-    }
-
-
     /* =====================================
        HEADER
     ====================================== */
@@ -1491,12 +1478,10 @@ img {
         height: 72px;
     }
 
-
     .logo {
         width: 44px;
         height: 44px;
     }
-
 
     .mobile-nav {
         top: 72px;
@@ -1518,18 +1503,15 @@ img {
         align-items: flex-start;
     }
 
-
     .hero-grid {
         display: block;
     }
-
 
     .hero-text {
         position: relative;
 
         z-index: 2;
     }
-
 
     .eyebrow {
         margin-bottom: 20px;
@@ -1539,7 +1521,6 @@ img {
         letter-spacing: 4px;
     }
 
-
     .hero h1 {
         font-size: 48px;
 
@@ -1547,7 +1528,6 @@ img {
 
         line-height: 1.02;
     }
-
 
     .hero-description {
         margin-top: 25px;
@@ -1558,6 +1538,8 @@ img {
     }
 
 
+    /* BUTTONS */
+
     .hero-buttons {
         flex-direction: column;
 
@@ -1565,7 +1547,6 @@ img {
 
         margin-top: 30px;
     }
-
 
     .button {
         width: 100%;
@@ -1576,68 +1557,61 @@ img {
 
     /*
         =====================================
-        FIX НА ЛОГОТО
+        MOBILE LOGO
         =====================================
 
-        СТАРИЯТ ПРОБЛЕМ БЕШЕ:
+        ТОВА Е ВАЖНОТО.
+
+        Логото НЕ се движи.
+
+        Не използваме:
 
         right: -145px;
-
-        Това изкарваше логото извън
-        viewport-а.
-
-        СЕГА:
-
         right: 50%;
-        transform: translateX(50%);
+        translateX(50%);
+        translateY();
+        animation;
 
-        Така центърът на логото винаги
-        съвпада с центъра на телефона.
-
-        Няма значение дали телефонът е
-        320px, 360px, 390px или 430px.
+        Просто го центрираме:
     */
 
     .hero-image {
         position: absolute;
 
-        left: auto;
-        right: 50%;
+        left: 50%;
+        right: auto;
 
         bottom: 35px;
 
-        width: min(
-            300px,
-            78vw
-        );
+        width: 280px;
 
         transform:
-            translateX(50%);
+            translateX(-50%);
 
         opacity: 0.10;
 
         pointer-events: none;
     }
 
-
     .hero-image img {
         width: 100%;
         height: auto;
-    }
 
+        box-shadow:
+            0 25px 50px
+            rgba(0, 0, 0, 0.45);
+    }
 
     .hero-image-border {
-        width: 270px;
-        height: 270px;
+        width: 250px;
+        height: 250px;
     }
-
 
     .hero-line {
         left: 85%;
 
         opacity: 0.5;
     }
-
 
     .hero-bottom {
         display: none;
@@ -1652,13 +1626,11 @@ img {
         margin-bottom: 45px;
     }
 
-
     .section-heading h2 {
         font-size: 42px;
 
         letter-spacing: -2px;
     }
-
 
     .section-heading > p {
         font-size: 14px;
@@ -1684,22 +1656,18 @@ img {
         padding: 25px 0;
     }
 
-
     .service:hover {
         padding-left: 0;
         padding-right: 0;
     }
 
-
     .service-number {
         font-size: 10px;
     }
 
-
     .service-main h3 {
         font-size: 20px;
     }
-
 
     .service-main p {
         margin-top: 8px;
@@ -1709,11 +1677,9 @@ img {
         line-height: 1.6;
     }
 
-
     .service-arrow {
         font-size: 20px;
     }
-
 
     .service-hint {
         font-size: 10px;
@@ -1728,23 +1694,19 @@ img {
         gap: 50px;
     }
 
-
     .about-image-frame {
         padding: 15px;
     }
 
-
     .about-text h2 {
         font-size: 42px;
     }
-
 
     .about-description {
         font-size: 14px;
 
         line-height: 1.75;
     }
-
 
     .advantages {
         grid-template-columns: 1fr;
@@ -1753,7 +1715,6 @@ img {
 
         margin-top: 30px;
     }
-
 
     .advantage p {
         font-size: 13px;
@@ -1777,11 +1738,9 @@ img {
         gap: 12px;
     }
 
-
     .gallery-main {
         grid-row: auto;
     }
-
 
     .gallery-overlay {
         padding: 20px;
@@ -1797,7 +1756,6 @@ img {
             );
     }
 
-
     .gallery-overlay h3 {
         font-size: 18px;
     }
@@ -1811,13 +1769,11 @@ img {
         padding: 85px 0;
     }
 
-
     .statement h2 {
         font-size: 44px;
 
         letter-spacing: -2px;
     }
-
 
     .statement p {
         font-size: 14px;
@@ -1834,13 +1790,11 @@ img {
         margin-bottom: 45px;
     }
 
-
     .contact-heading h2 {
         font-size: 42px;
 
         letter-spacing: -2px;
     }
-
 
     .contact-heading p {
         font-size: 14px;
@@ -1848,31 +1802,26 @@ img {
         line-height: 1.75;
     }
 
-
     .contact-item {
         min-height: 115px;
 
         padding: 22px 0;
     }
 
-
     .contact-item:hover {
         padding-left: 0;
         padding-right: 0;
     }
 
-
     .contact-item span {
         margin-bottom: 9px;
     }
-
 
     .contact-item strong {
         max-width: 270px;
 
         font-size: 15px;
     }
-
 
     .contact-item b {
         font-size: 20px;
@@ -1906,7 +1855,6 @@ img {
         align-items: flex-end;
     }
 
-
     .modal-box {
         width: 100%;
 
@@ -1914,7 +1862,6 @@ img {
 
         padding: 38px 22px 25px;
     }
-
 
     .modal-close {
         top: 12px;
@@ -1924,18 +1871,15 @@ img {
         height: 38px;
     }
 
-
     .modal-number {
         margin-bottom: 15px;
     }
-
 
     .modal-box h2 {
         font-size: 34px;
 
         padding-right: 35px;
     }
-
 
     .modal-content {
         margin-top: 22px;
@@ -1944,7 +1888,6 @@ img {
 
         line-height: 1.75;
     }
-
 
     .modal-button {
         width: 100%;
@@ -1955,7 +1898,6 @@ img {
 
         margin-top: 10px;
     }
-
 }
 
 
@@ -1969,44 +1911,44 @@ img {
         font-size: 42px;
     }
 
-
     .section-heading h2,
     .about-text h2,
     .contact-heading h2 {
         font-size: 37px;
     }
 
-
     .service {
         min-height: 175px;
     }
-
 
     .service-main h3 {
         font-size: 18px;
     }
 
 
-    
+    /*
+        МАЛЪК ТЕЛЕФОН
+
+        Пак е центрирано.
+        Само намаляваме размера.
+    */
 
     .hero-image {
-        width: min(
-            280px,
-            76vw
-        );
+        left: 50%;
+        right: auto;
 
-        right: 50%;
+        width: 250px;
 
         bottom: 30px;
 
         transform:
-            translateX(50%);
-    }
+            translateX(-50%);
 
+        opacity: 0.10;
+    }
 
     .hero-image-border {
-        width: 240px;
-        height: 240px;
+        width: 220px;
+        height: 220px;
     }
-
 }
