@@ -410,13 +410,30 @@ img {
    HERO IMAGE
 ========================================= */
 
-.hero-image {
-    position: relative;
+@media (max-width: 600px) {
 
-    display: flex;
+    .hero-image {
+        position: absolute;
 
-    align-items: center;
-    justify-content: center;
+        left: 50%;
+        right: auto;
+
+        bottom: 35px;
+
+        width: min(300px, 78vw);
+
+        transform: translateX(-50%);
+
+        opacity: 0.10;
+
+        pointer-events: none;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: auto;
+    }
+
 }
 
 .hero-image img {
@@ -1970,21 +1987,7 @@ img {
     }
 
 
-    /*
-        НЕ ПИПАЙ right ТУК.
-
-        Старият код имаше:
-
-        right: -170px;
-
-        което беше причината логото
-        да излиза извън телефона.
-
-        Сега наследяваме правилното:
-
-        right: 50%;
-        transform: translateX(50%);
-    */
+    
 
     .hero-image {
         width: min(
